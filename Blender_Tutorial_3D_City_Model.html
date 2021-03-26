@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EAS687 Blender Tutorial- 3D City Models</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b6cc5a8b-9f96-4f81-9cb6-8e8e80ca2d1f" class="page sans"><header><img class="page-cover-image" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/city.png" style="object-position:center 50%"/><h1 class="page-title">EAS687 Blender Tutorial- 3D City Models</h1></header><div class="page-body"><p id="1adf330e-afc4-4ccd-bc48-93770d1816b6" class="">Yan Li  03/20/2021</p><p id="f5f7533c-f231-45e6-95d0-d0a5fc5f35a4" class="">
+</p><p id="a2910b46-0770-40c8-a52c-2abefeaeb22e" class=""><strong>Introduction:</strong></p><p id="275ac6e0-6ea4-4c05-beb2-2822507e8cf5" class=""><strong>Blender</strong> is a free and open-source 3D computer graphics software toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive 3D applications, virtual reality, and computer games. (Wikipedia)</p><p id="3a9a4872-2b25-44e4-917b-7fdbe4c4f806" class=""><strong>BlenderGIS</strong> is a free add-on in Blender that used to generate topographies and street maps using data from <a href="http://openstreetmap.org/">OpenStreetMap.org</a> and Shuttle Radar Topography Mission (SRTM) data from NASA/Jet Propulsion Laboratory.</p><p id="bc0ff6b6-e2aa-4992-8fae-d4237dcfb89e" class=""><strong>Capturing open-source urban spatial data in layers by Blender GIS</strong></p><p id="ba79fa4e-c53f-4d16-a022-749652dd92be" class="">In the early stages of planning and design projects, we usually need large-scale urban background information and spatial data. Today this tutorial aims to demonstrate a simple and quick way to obtain open-source urban spatial data, which is already categorized by features and really-to-use for quick site analysis and early design ideation. This method will be of great help to save your time and energy instead of manually tracing the map or digitalizing it in GIS. Enjoy and have fun :) </p><p id="c6387f0a-2bf6-4518-abfb-5f71c09a93bb" class="">There are a few checkpoints in this tutorial, reminder to save your file at each checkpoint! </p><p id="3c6843c9-e513-4eb6-8dee-4c819149e0bd" class="">
+</p><ul id="3aeb38ca-c737-4414-b25f-6631e4c12f6b" class="toggle"><li><details open=""><summary><mark class="highlight-purple_background"><strong>Download &amp; Setup (skip this session if you already did! Click the down triangle to hide)</strong></mark></summary><p id="d44fd153-2e5e-401e-902f-6d966a01e131" class="">Download Blender <a href="https://www.blender.org/download/">here</a>: <a href="https://www.blender.org/download/">https://www.blender.org/download/</a></p><p id="341aa214-d56f-4ffe-99ef-0dab70713fd6" class="">Choose the versions that fit your device. Click the blue-button to download  Windows 64 Installer(160MB). If your computer system is macOS or other versions, please click the gray button, then download the correlate Installer in the drop-down menu.</p><figure id="597d5744-e123-425a-85e9-126e2efaddd4" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled.png"><img style="width:997px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled.png"/></a></figure><p id="b8c53520-56d1-4bfa-9f34-69edb0964a95" class="">
+</p><p id="c4b81062-cae0-4850-b5ea-0dab58ec2905" class="">Download Blender GIS<a href="https://github.com/domlysz/BlenderGIS"> here</a>:</p><p id="68b5645b-6de1-4280-a365-5695c3c2d6f9" class=""><a href="https://github.com/domlysz/BlenderGIS">https://github.com/domlysz/BlenderGIS</a></p><p id="3efaaebf-a87c-49f3-8424-4f02c03fe853" class="">First, click the upright green button &quot;Code&quot;, and then click the &quot;Download ZIP&quot; option at the drop-down menu, to download the master folder to your device(about 410KB).</p><figure id="1ad5aa8e-d089-4838-8b21-dcf3944397a8" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%201.png"><img style="width:997px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%201.png"/></a></figure><p id="7c57d691-7f72-4b6d-b07f-850be543d487" class="">Find the Blender Installer at your local computer. Double click to launch the Setup Installation.</p><figure id="e81e61b9-9d7d-4854-9ab2-a70e8459098b" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%202.png"><img style="width:611px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%202.png"/></a></figure><p id="a720d208-bfd4-4f17-8cb7-a71c94327e68" class="">Go Next.</p><figure id="a7f5662c-846c-4b84-92ae-66277ab466b6" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%203.png"><img style="width:493px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%203.png"/></a></figure><p id="75b44c90-06ae-46ce-92ba-b4298ad6aee3" class="">Choose the Location you want to install the Blender software. Then click next.</p><figure id="d712b330-fc00-46ae-a124-ba63e1b293a3" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%204.png"><img style="width:494px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%204.png"/></a></figure><p id="ab058285-8b2a-4395-9715-9eeca45e50eb" class="">Click Install and wait several seconds for the Installation finish.</p><figure id="52af2f43-7b98-4f30-a3b2-89b784fe9967" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%205.png"><img style="width:496px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%205.png"/></a></figure><p id="8fe5d394-68e5-42db-90d4-66bced9b75bb" class="">Open Blender. Now we will install the Blender GIS Add-on that we download from GitHub before.</p><figure id="20e4fdc9-1d36-4ff6-8736-00e5ca1c53f0" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%206.png"><img style="width:1920px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%206.png"/></a></figure><p id="ce2fc40f-8de4-4dd4-aadf-1e77ad375efb" class="">Click edit and then chose Preference at the drop-down menu.</p><figure id="0c61c441-b171-4696-a908-50c34fb8d6f1" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%207.png"><img style="width:969px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%207.png"/></a></figure><p id="e344317a-8b78-4ecc-9d06-4a5f545cb076" class="">A new window will pop-up like below.</p><figure id="213f3ae9-5b6e-49c1-8086-8aee65e9960f" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%208.png"><img style="width:654px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%208.png"/></a></figure><p id="65d3dcde-a066-430d-b31b-f28e630b578e" class="">Click  &quot;Add-on&quot; in left list, then click the install button.</p><figure id="5e1b857b-c5fa-4d84-ad8f-ec349a63e293" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%209.png"><img style="width:676px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%209.png"/></a></figure><p id="7da77c1d-0d5c-45e4-9fbf-63a12d310588" class="">In the new pop-up window, select the location where you store the Blender GIS folder. (Not need to unzip the file)</p><figure id="583a290a-d298-4138-b698-749dffe4fa18" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2010.png"><img style="width:1013px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2010.png"/></a></figure><p id="c667f21c-b461-4247-b6dd-6bec05b68b60" class="">Second, there&#x27;s another setting that you have to apply: the cache location. Expand the triangle here.</p><figure id="e6af78af-32cb-482d-b23f-c8acc5994f64" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2011.png"><img style="width:659px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2011.png"/></a></figure><p id="7514635f-10db-440a-9260-1d65b80d6427" class="">Scroll down the drop-down menu to the cache folder section and choose a temporary file location to put the cache. That&#x27;s all the add-on setup! Good job everyone!</p><figure id="09e0dd41-b71a-4b23-b44d-11ff28210ad3" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2012.png"><img style="width:670px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2012.png"/></a></figure></details></li></ul><p id="e9cb144d-5eca-47d1-b075-606df281465f" class="block-color-orange_background"><strong>Checkpoint #1 Finish Install and Set-up</strong></p><p id="d48e0aec-9701-4e0b-ba73-f6ad269989a0" class="">Back to the Blender main interface. Click the new option that you create that named &quot;GIS&quot;</p><figure id="3c4b80e9-a039-48a6-99dd-62c621674e9b" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2013.png"><img style="width:983px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2013.png"/></a></figure><p id="ca98f118-d064-4544-bdf7-c26ea8b897b1" class="">Navigate to GIS&gt;Basemap.</p><figure id="6df566fa-6222-4444-b3f6-8f6afa013379" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2014.png"><img style="width:942px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2014.png"/></a></figure><p id="23d79ccc-e6a1-4acd-910a-c9009d33274c" class="">Click ok to launch the map. It&#x27;s set to Google but you can also choose OSM/Bing or osm WMS etc. You can also choose the map or the satellite version here. I&#x27;m just gonna leave it at the defaults in this demo.</p><figure id="59496ca9-bff9-499d-9a51-708ce7a28790" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2015.png"><img style="width:941px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2015.png"/></a></figure><p id="acc83bf4-2c54-4dac-a554-bcae6b57c70e" class="">Press <strong>OK</strong> to start.
+After the world map loads up, you can zoom in to this map and then find the area that you&#x27;re interested in.</p><p id="b66accdc-9220-4be1-9c23-a8fe9751620b" class="">To demonstrate, I&#x27;m gonna zoom in the Detroit City.
+You can search for a location by<mark class="highlight-teal_background"> press </mark><mark class="highlight-teal_background"><strong>G(</strong></mark><em><mark class="highlight-teal_background">keyboard)</mark></em> and type in “<span style="border-bottom:0.05em solid">Detroit</span>(replace with your destination)” and set a zoom level as well. OR You can also just press the plus icons on the number pad and scrolling to the location. </p><figure id="8fb5901e-ae32-4d0c-b97e-96ea17edac7a" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2016.png"><img style="width:944px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2016.png"/></a></figure><p id="bf7cc5c5-0de4-4d18-85bf-1ff72154d145" class="">Once you&#x27;re happy with it and you can <mark class="highlight-teal_background">press </mark><mark class="highlight-teal_background"><strong>E (</strong></mark><em><mark class="highlight-teal_background">keyboard)</mark></em> to export that section. As an outcome,  it brings in a two-dimensional image plane of the area that you selected.</p><p id="987d2c5f-e447-42af-b6aa-c6c2e5b9db1f" class="">Therefore, you get a high-resolution map for your 3D model.</p><figure id="d4a9b73e-6f70-48f5-91c7-54b235c7ffcc" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2017.png"><img style="width:947px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2017.png"/></a></figure><p id="a111a82e-b53a-40fe-8c5a-32e66d3f64dc" class="">Navigate to GIS&gt;Web geodata&gt;Get elevation(SRTM)</p><figure id="1bed1e71-aec7-48ad-92fc-7ed6a28f006a" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2018.png"><img style="width:948px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2018.png"/></a></figure><p id="06ac6866-4b95-40b6-9814-34014eedc568" class="">Press OK to add elevation</p><figure id="4c3513ad-0fbc-4677-bb43-9f94d681527b" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2019.png"><img style="width:953px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2019.png"/></a></figure><p id="46bdbbe5-0f1f-443f-af98-a5e3b7833b8b" class="block-color-orange_background"><strong>Checkpoint #2 Load Basemap + Elevation</strong></p><p id="89996cec-57b9-4647-9c7a-0512981e91e3" class="">Now lets explore the OSM data!  Save your file and make sure the basemap is selected. Then navigate to GIS&gt;Web geodata&gt;Get OSM.</p><figure id="9269cb87-4296-49d2-a103-b36300ea48e0" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2020.png"><img style="width:950px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2020.png"/></a></figure><p id="3730dff3-9982-4c42-98f2-814dfb04c8bd" class="">Choose the extent first, then select the <strong>Ways</strong>（data category）you wanted<strong>. </strong>Also, enable the <strong>elevation from objects</strong> for obtaining the correct elevation(for example, the height of the building). <strong> </strong></p><p id="82166fbb-60b4-4ecf-a3ef-e038365d9940" class="">**<strong>If you think your computer is not strong enough, please try 1-2 Ways each time to avoid a crash.**</strong></p><figure id="53f029f4-c1e7-4ce3-a876-fbfb046bdda6" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2021.png"><img style="width:949px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2021.png"/></a></figure><p id="1919d1c1-4eea-418d-9898-449d2516651b" class="">You can choose all of them at one time: Holding down shift then select all objects. Then click <strong>OK</strong> on the bottom. (<em>You might need to be a little bit patient with this. It can take quite a long time, mine took about 10-15 minutes to load up.)</em></p><figure id="267a29a7-8095-4fb4-8b24-395aba4b7e61" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2022.png"><img style="width:947px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2022.png"/></a></figure><p id="fc5586ce-0185-4dbd-b5aa-caf064a61323" class="">This tutorial will demonstrate the walkthrough process of loading objects separately as follow：</p><p id="2c1165bc-d54f-4b2f-99f7-3bdfd6efc2cf" class="">Let‘s add the building layer first. Make sure the basemap is selected, then  navigate to GIS&gt;Web geodata&gt;Get OSM, choose building, and make sure enable the checkbox of  <strong>elevation from objects.</strong></p><figure id="f7f78f92-0111-429e-a236-0bd8b857815c" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2023.png"><img style="width:944px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2023.png"/></a></figure><p id="b7ab464c-cfe5-4c2e-a103-0b878f6cf8f4" class="">It may take 10mins or more to load up the road/building data. Result of adding <em><strong>building</strong></em> objects:</p><figure id="36cfaa85-4da1-469a-b1e1-22e242431cc2" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2024.png"><img style="width:927px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2024.png"/></a></figure><p id="31f7d7bf-2aa4-4d31-bd0d-e5efcc2a3228" class="">Only select the basemap, then repeat the steps that navigate to GIS&gt;Web geodata&gt;Get OSM and choose<em><strong> highway</strong></em> this time.</p><figure id="7de58f1a-815c-4219-82f4-82290a0cad19" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2025.png"><img style="width:935px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2025.png"/></a></figure><p id="388bbe9c-9a7f-4997-9e6c-d7bde180e43c" class="">The road data may extend your map extent, but remember to select the same base map extent for other objects.</p><figure id="4704c7a3-7801-4ef3-a74d-e6b11995288f" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2026.png"><img style="width:941px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2026.png"/></a></figure><p id="8554d36e-4513-4798-ac84-89f57fc7d8b1" class="">Repeat the previous steps again for other data categories. </p><figure id="e3db188e-547c-4956-9cb1-3cde6f2470b0" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2027.png"><img style="width:937px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2027.png"/></a></figure><p id="0f178388-aef4-4c32-b4c2-f5148df8b91f" class="">As the result, you can see that we&#x27;ve got lots of different layers here. we&#x27;ve got buildings, highways, land, railway, waterway, etc.</p><figure id="207e985c-2f8a-4293-9877-82a529c12401" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2028.png"><img style="width:943px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2028.png"/></a></figure><p id="56ad6f52-fdb9-4cb9-9de1-0fc765c24f29" class="block-color-orange_background"><strong>Checkpoint #3 Your Excellent 3D City Model! </strong></p><p id="9cae0745-4f85-4c4f-96c5-e28170891dc9" class="">After loading all OSM data into your model, you can check those data in the layers panel(in the upright corner), which are categorized in different layers and ready to use.</p><p id="bb1d4f80-4cb3-493e-bf0d-34f77b938f42" class="">A screenshot is enough for submission! Have Fun :) </p><figure id="579f3da1-331d-49db-b18c-487b388eefb6" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2029.png"><img style="width:954px" src="EAS687%20Blender%20Tutorial-%203D%20City%20Models%20597d5744e123425a85e9126e2efaddd4/Untitled%2029.png"/></a></figure><p id="1a0f7e7a-c0a0-42e8-a177-750327c2da90" class="">
+</p><p id="0688121d-b66c-495f-97c2-5c8fb89491dd" class="">_____________________________________________________Advanced Modification____________________________________________________________</p><p id="9ac6428c-a4c5-469a-810c-b45766eb36ec" class="">If you want to explore further, here is some resources for advanced modification:</p><p id="72117885-bc41-470f-a33c-fab02e7f0a1b" class="">a. With Blender:<div class="indented"><p id="2e21b79d-0a07-4055-ae70-757f436ce6c0" class="">Rendering: <a href="https://youtu.be/t6ypxnYtl0g">Blender GIS - Texturing Buildings</a></p><p id="6ca1e1ce-654d-49da-99e7-18a27af044ba" class="">Add trees: <a href="https://youtu.be/jMDRc4hJwvA">CUSTOM TREES in Blender - FREE Tree Creation Add-On - Sapling Tree Generator</a></p></div></p><p id="73d29415-eb26-4c08-99b5-f01ca1f50133" class=""> b. Export to Rhino: <div class="indented"><p id="5923c1fe-411e-4871-87e3-4e50de88492a" class="">Modify the model in Rhino.<div class="indented"><p id="31fc215d-9eb9-492c-b62e-6fb1b03308fd" class=""><em>Export to rhino as the format of (.stl/.obj), then import it in Rhino. </em></p><p id="27ca778d-af33-48b0-867f-bf49ad2dc519" class="">
+</p></div></p></div></p></div></article></body></html>

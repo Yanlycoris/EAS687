@@ -1,0 +1,641 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EAS687 Blender Tutorial- 3D Landscape Models</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5fc7a29b-77b1-4c49-9df3-fdd907a6d03d" class="page sans"><header><img class="page-cover-image" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/landscape.png" style="object-position:center 50%"/><h1 class="page-title">EAS687 Blender Tutorial- 3D Landscape Models</h1></header><div class="page-body"><p id="a7ed99b7-6c0b-40cc-b788-f4e46ee234e3" class="">Yan Li  03/20/2021</p><p id="e8e2a4bf-41c7-48bd-87dd-b5b95948a07b" class="">
+</p><p id="eb0e69b5-77e1-4cc0-bdf4-3f8db40b9a78" class=""><strong>Introduction:</strong></p><p id="1ae6951c-0450-47cd-b992-553dd9ebf98e" class=""><strong>Blender</strong> is a free and open-source 3D computer graphics software toolset used for creating animated films, visual effects, art, 3D printed models, motion graphics, interactive 3D applications, virtual reality, and computer games. (Wikipedia)</p><p id="0d49d26b-3104-4383-924b-cfb99076d258" class=""><strong>BlenderGIS</strong> is a free add-on in Blender that used to generate topographies and street maps using data from <a href="http://openstreetmap.org/">OpenStreetMap.org</a> and Shuttle Radar Topography Mission (SRTM) data from NASA/Jet Propulsion Laboratory.</p><p id="a4fdc17a-e6d0-4afa-bc3c-bee754fd1021" class=""><strong>Create large-scale 3D terrain by Blender GIS</strong></p><p id="df3b64ba-4749-4c3c-bb24-612d164e28f4" class="">Today this tutorial aims to demonstrate a simple and quick way to obtain open-source spatial data and create a 3D terrain model, which will be a great help for quick site analysis and early design ideation. Enjoy and have fun :)</p><p id="04cf7851-fd48-4682-b4fe-126d69a0b237" class="">There are a few checkpoints in this tutorial, reminder to save your file at each checkpoint! </p><p id="d9f23626-8538-4764-a674-ef04ec0c4898" class="">
+</p><ul id="bc54af78-5f15-44b3-832c-e0b892a4ee11" class="toggle"><li><details open=""><summary><mark class="highlight-purple_background"><strong>Download &amp; Setup (skip this session if you already did! Click the down triangle to hide)</strong></mark></summary><p id="7631e7a1-0a87-4913-b244-29fe5c1e8204" class="">Download Blender <a href="https://www.blender.org/download/">here</a>: <a href="https://www.blender.org/download/">https://www.blender.org/download/</a></p><p id="6bcb7f28-35ba-4941-aec0-52185f9eb605" class="">Choose the versions that fit your device. Click the blue-button to download  Windows 64 Installer(160MB). If your computer system is macOS or other versions, please click the gray button, then download the correlate Installer in the drop-down menu.</p><figure id="cfd3e6b1-c9f6-4b23-a97d-c5071306cce2" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled.png"><img style="width:997px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled.png"/></a></figure><p id="a02dc9fc-c69e-4582-9c21-76f9a734a103" class="">
+</p><p id="b820faa1-a8c8-42d7-b35a-e30adf822ca6" class="">Download Blender GIS<a href="https://github.com/domlysz/BlenderGIS"> here</a>:</p><p id="bc03aebf-185c-45d2-ad8f-3998af4d2421" class=""><a href="https://github.com/domlysz/BlenderGIS">https://github.com/domlysz/BlenderGIS</a></p><p id="3bd1d352-a7d4-4501-b0e5-96eacfdfad72" class="">First, click the upright green button &quot;Code&quot;, and then click the &quot;Download ZIP&quot; option at the drop-down menu, to download the master folder to your device(about 410KB).</p><figure id="4c1258c8-4e28-470c-bc78-4b29c55f1f12" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%201.png"><img style="width:997px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%201.png"/></a></figure><p id="e68fba44-d460-4653-8235-6113f782680f" class="">Find the Blender Installer at your local computer. Double click to launch the Setup Installation.</p><figure id="62703d90-1ea2-44e3-a0e3-c6ec4404ed26" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%202.png"><img style="width:611px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%202.png"/></a></figure><p id="2d0d308e-65e2-4d6e-8afb-d942b5f7e4de" class="">Go Next.</p><figure id="495022f5-8f6e-4f24-8595-96bb867d3f9b" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%203.png"><img style="width:493px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%203.png"/></a></figure><p id="6336b15d-0b04-4c58-a2a3-c1d809392941" class="">Choose the Location you want to install the Blender software. Then click next.</p><figure id="c63c369d-0a25-4415-af57-b234613c98ea" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%204.png"><img style="width:494px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%204.png"/></a></figure><p id="a2ac812b-4cc4-432f-a609-dd1b4e4e0fca" class="">Click Install and wait several seconds for the Installation finish.</p><figure id="150af5f8-5994-47d3-84ca-12e71d6e7b51" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%205.png"><img style="width:496px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%205.png"/></a></figure><p id="9a6cadd4-10f9-4159-a9da-7e7154e1ca94" class="">Open Blender. Now we will install the Blender GIS Add-on that we download from GitHub before.</p><figure id="e2bc41e2-52fa-4906-9ebd-89b8fd7f128e" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%206.png"><img style="width:1920px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%206.png"/></a></figure><p id="13161b1a-062a-41b3-b152-93cef5b55272" class="">Click Edit and then chose Preference at the drop-down menu.</p><figure id="524c895b-919a-4673-b059-80e23bdbee04" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%207.png"><img style="width:969px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%207.png"/></a></figure><p id="847c7d7f-48c5-43cb-94d2-a9c31f643efa" class="">A new window will pop-up like below.</p><figure id="2d8d7efb-de4c-4b14-a1db-acbd66ce37e8" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%208.png"><img style="width:654px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%208.png"/></a></figure><p id="335a17a1-aceb-4a5a-bba6-42ac1fa5f96f" class="">Click  &quot;Add-on&quot; in left list, then click the install button.</p><figure id="b8d75741-17b3-40b9-86b8-5b8dc2cf0126" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%209.png"><img style="width:676px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%209.png"/></a></figure><p id="0dec90e8-802b-452a-8f40-c811e0e4b48f" class="">In the new pop-up window, select the location where you store the Blender GIS folder. (Not need to unzip the file)</p><figure id="d9b1b5cc-c6a0-4c56-9b3c-927d0146c69b" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2010.png"><img style="width:1013px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2010.png"/></a></figure><p id="e715401e-127e-4d0e-998c-2362981fd5d2" class="">Second, there&#x27;s another setting that you have to apply: the cache location. Expand the triangle here.</p><figure id="e6db647e-73c8-4d8f-9d52-b2e58c893c4c" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2011.png"><img style="width:659px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2011.png"/></a></figure><p id="5229110c-8a4f-49e0-a909-4263313e5f44" class="">Scroll down the drop-down menu to the cache folder section and choose a temporary file location to put the cache. That&#x27;s all the add-on setup! Good job everyone!</p><figure id="c7737f58-4526-47cb-bb5e-51df679f3e27" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2012.png"><img style="width:670px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2012.png"/></a></figure><p id="0e47c375-bef2-4535-9466-3aeca891315d" class="">
+</p></details></li></ul><p id="b17c6578-6ec6-4a8b-974b-84fcbcb44911" class="block-color-orange_background"><strong>Checkpoint #1 Finish Install and Set-up</strong></p><p id="e2514a12-fdcf-476e-aa41-43569c58023c" class="">Back to the Blender main interface. Click the new option that you create that named &quot;GIS&quot;</p><figure id="8cdc0f60-0ccc-49fd-b805-32f1f3f71d16" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2013.png"><img style="width:983px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2013.png"/></a></figure><p id="b79cd3e8-51d7-4bd1-96eb-a8f484746448" class="">Navigate to GIS&gt;Basemap.</p><figure id="f758d84f-bab6-4299-8a32-5834e3d14547" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2014.png"><img style="width:942px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2014.png"/></a></figure><p id="d744779a-c456-4a47-af02-b36f419e019b" class="">Click ok to launch the map. It&#x27;s set to Google but you can also choose OSM/Bing or osm WMS etc. You can also choose the map or the satellite version here. I&#x27;m just gonna leave it at the defaults in this demo.</p><figure id="34a5030d-7fb0-409e-bb24-a3f6931bfa4d" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2015.png"><img style="width:941px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2015.png"/></a></figure><p id="65b85f60-a568-4f47-8cf3-49f698cc2a50" class="">Press <strong>OK</strong> to start.
+After the world map loads up, you can zoom in to this map and then find the area that you&#x27;re interested in.</p><p id="ec295b83-0efe-489b-804f-f709bf0d620f" class="">To demonstrate, I&#x27;m gonna zoom in the Detroit City.
+You can search for a location by<mark class="highlight-teal_background"> press </mark><mark class="highlight-teal_background"><strong>G(</strong></mark><em><mark class="highlight-teal_background">keyboard)</mark></em> and type in “Detroit(replace with your destination)” and set a zoom level as well. OR You can also just press the plus icons on the number pad and scrolling to the location. </p><figure id="2db35e6e-6590-4797-ae24-fc44ee9404d8" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2016.png"><img style="width:944px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2016.png"/></a></figure><p id="4a7d4cf5-26fc-48e8-9dec-fc73c77e7a0a" class="">
+</p><p id="69c9dd00-96e6-4454-9066-1dae1e2d5344" class="">Once you&#x27;re happy with it and you can <mark class="highlight-teal_background">press </mark><mark class="highlight-teal_background"><strong>E (</strong></mark><em><mark class="highlight-teal_background">keyboard)</mark></em> to export that section. As an outcome,  it brings in a two-dimensional image plane of the area that you selected.</p><p id="61544a35-bd95-4c12-b44e-9d42e90879f3" class="">Therefore, you get a high-resolution map for your 3D model.</p><p id="1f9f8456-40c8-47f2-b362-617944995e0e" class="">
+</p><figure id="e3605c98-45ff-4f64-a020-40726fddb9dd" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2017.png"><img style="width:2382px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2017.png"/></a></figure><p id="b835019f-9cd8-43ba-93b2-ba30da635dfb" class="">Navigate to GIS&gt;Web geodata&gt;Get elevation(SRTM)</p><p id="1d7e8df4-56dd-4a03-b39d-9b48db0c69e2" class="">
+</p><figure id="27e4f60f-b96e-4b23-9fb6-71715f6dc261" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2018.png"><img style="width:2382px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2018.png"/></a></figure><p id="f7594032-6b1b-485d-8512-0f9a0f6512d8" class="">Press OK to add elevation</p><figure id="2a81014b-f73c-40fa-98b8-b21b0556cec7" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2019.png"><img style="width:1654px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2019.png"/></a></figure><p id="316c047a-6008-4111-9097-11a1fcc8f79d" class="block-color-orange_background"><strong>Checkpoint #2 Load Basemap + Elevation</strong></p><p id="f96363f6-4826-4a95-9221-fb4f2abd37c7" class="">Now lets explore the modeling function of blender! Make a beautiful skirt for your terrain&#x27;s surface (add the thickness for it to look like a real physical cutting of earth).</p><figure id="b0cf9444-4b41-4c9a-b126-1beebc84f55f" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2020.png"><img style="width:1654px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2020.png"/></a></figure><p id="0419fc28-2adf-4604-9fcd-38db67eca4de" class="">Navigate to Modifier Properties (tool icon on the right working area), click the drop-down menu&gt;Apply.</p><figure id="1b8b1537-1a91-4f94-af27-f92d0e20c560" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2021.png"><img style="width:1957px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2021.png"/></a></figure><p id="7c7539bd-a180-4c6b-9c49-d47895b70265" class="">After apply, the detailed settings will disappear from your screen. (<em>You might need to be a little bit patient with this. It may take you some time.)</em></p><figure id="8ba8b483-9c69-4eda-9da3-3d092bd7dec2" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2022.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2022.png"/></a></figure><p id="0c4ddfd0-8cb3-47d1-8b02-547e52567ec6" class="">Go Modeling workplace.</p><figure id="377b1ba3-c088-49ed-9b00-7da44cb06a65" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2023.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2023.png"/></a></figure><p id="0c830e5d-f750-4b9d-b227-7858dc5fbcdd" class="">Navigate to View&gt;Viewpoint&gt;Right. </p><figure id="f5969b06-03a9-43e6-b517-09a226a5b7da" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2024.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2024.png"/></a></figure><p id="cb6ca94e-8128-4463-90d3-562a0165f0ea" class="">Left click and hold on (long press) to enable the box select, OR navigate to Select&gt; Select ALL to select the whole model:</p><figure id="8f5b3f82-41d6-443b-9918-4d9308370bfc" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2025.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2025.png"/></a></figure><p id="a9b38c77-02be-4872-a78e-7a883dda29ae" class="">Click <strong>Extrude </strong>function on the left.</p><figure id="1b6fe7ad-63b4-462e-ae61-e1225c121a2c" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2026.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2026.png"/></a></figure><p id="60357f64-1b51-4d89-874c-9b4099e0701a" class="">Hold the yellow plus icon, drag down to give your model a thickness (<em>Hold </em><em><strong>shift</strong></em><em> to along the Z axis</em>).</p><figure id="15ee17ca-afe7-4c00-950e-6bd75e311296" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2027.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2027.png"/></a></figure><ul id="22342865-6681-4a5a-bdac-e1fb2ee36f42" class="toggle"><li><details open=""><summary><mark class="highlight-gray_background">Optional: flatten the bottom</mark></summary><p id="7d720264-e15a-4201-9fd6-6760ef208f04" class="">If you want you can flatten the bottom, you can 1) <mark class="highlight-teal_background">press S+Z</mark> to drag all faces to same elevation OR 2) enable the add-on LoopTools (Go Edit&gt;Preferences&gt;Add-ons, then search &quot;LoopTools&quot;), then right click to flatten the model base. </p><figure id="9efb81dd-94c9-455e-8ba3-98a1547a249c" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2028.png"><img style="width:1985px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2028.png"/></a></figure><figure id="038e3414-9008-4b2d-93ac-0a54bd81fe55" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2029.png"><img style="width:2088px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2029.png"/></a></figure><p id="4eb228e5-f0e3-4612-bb68-8120629bb641" class="">Then we will have the flat base of our model! Awesome！ </p><figure id="c718eb2e-d178-412f-aa48-7e95e21c6184" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2030.png"><img style="width:2247px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2030.png"/></a></figure></details></li></ul><p id="be08dcd0-6297-45a2-acfa-8326639914d6" class="">Go back to layout tab.</p><figure id="fdfa7857-4f4a-4349-a986-c62e1b62c59a" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2031.png"><img style="width:2088px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2031.png"/></a></figure><p id="96be649d-fc24-4811-84c3-8e783f4e55cb" class="">Go View Shading to display the object in rendering.</p><figure id="169ceae9-8479-4c1d-b446-68548cce1a4d" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2032.png"><img style="width:2088px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2032.png"/></a></figure><p id="36c1e03f-c9b6-49b0-86e7-c4b6c84b9769" class="block-color-orange_background"><strong>Checkpoint #3 Your Awesome city 3D model! </strong></p><p id="a86d25ae-6ae0-492f-98f9-622fd6328cd3" class="">A screenshot is enough for submission! Have Fun :) </p><p id="eaa08750-d1fe-4290-8a5e-80589cdfc716" class=""><em>Optional: You can go</em><em><strong> Render Properties</strong></em><em> then scroll down to the color management to modify the rendering effect.</em></p><figure id="630302c7-d3a2-4b6a-a092-cbb31fd0e951" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2033.png"><img style="width:2247px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2033.png"/></a></figure><p id="3bd1bc03-ce92-4d00-b7f9-0baa5d17f8b1" class="">
+</p><p id="40e304e6-4cd9-48d9-809f-c26b962ecf8b" class="">
+</p><p id="39b7c33c-6384-4ce7-8f9a-fb194f049367" class="">___________________________________________________Advanced Modification_______________________________________________________</p><p id="14a8f12e-14fa-40cf-ab71-6b6bca0e5e4e" class="">If you want to explore further, here is some resources for advanced modification:</p><p id="9070d571-eabc-4fc6-a97e-bf6d469b2950" class="">a. With Blender:<div class="indented"><p id="d003a119-a213-453d-8239-515e1f1b3c8a" class="">You can go <strong>Editor Type&gt; Shader Editor</strong> to modify the rendering effect.</p><p id="422adaf0-45ca-473a-9981-db72317ec100" class="">YouTube Tutorial of rendering(Start from 5:35):  <a href="https://youtu.be/Mj7Z1P2hUWk">https://youtu.be/Mj7Z1P2hUWk</a> </p><figure id="eda1a98d-b5aa-4576-bd9d-0677800a16c4" class="image"><a href="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2034.png"><img style="width:2088px" src="EAS687%20Blender%20Tutorial-%203D%20Landscape%20Models%20cfd3e6b1c9f64b23a97dc5071306cce2/Untitled%2034.png"/></a></figure><p id="6ee996cf-a0fa-4210-9356-fd6dfbaaff6e" class="">Add trees: <a href="https://youtu.be/jMDRc4hJwvA">CUSTOM TREES in Blender - FREE Tree Creation Add-On - Sapling Tree Generator</a></p></div></p><p id="af4706fa-6f31-4d10-9e0a-4d149c60323b" class=""> b. Export to Rhino: <div class="indented"><p id="e4ffeb8e-36b7-47ae-8417-f8ff352acfd1" class="">Export as <em>(.stl/.obj) </em>format then modify the model in Rhino.<div class="indented"><p id="4440d721-decb-460b-9fbb-9024d4dcc9db" class=""><em>Export to rhino &gt;&gt; Convert to mesh&gt;&gt; Edit the mesh surface</em></p><p id="ae83a838-9688-4444-86c0-1264c3efa93a" class="">
+</p></div></p></div></p><p id="5771f112-3a8f-4845-a264-0b9aad990453" class="">
+</p><p id="77635716-8aa4-4891-9ae5-e6f2650619cc" class="">
+</p></div></article></body></html>
