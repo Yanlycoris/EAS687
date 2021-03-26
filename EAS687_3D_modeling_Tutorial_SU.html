@@ -1,0 +1,634 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>EAS687 3D modeling Tutorial - SU</title><style>
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Songti TC", "Songti SC", "SimSun", "Nanum Myeongjo", NanumMyeongjo, Batang, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC', 'Noto Sans CJK KR'; }
+
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC', 'Noto Sans Mono CJK KR'; }
+
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4f46b631-0973-4a67-b01a-214e885ddc32" class="page sans"><header><h1 class="page-title">EAS687 3D modeling Tutorial - SU</h1></header><div class="page-body"><p id="5dfbe9a8-f5d9-4031-979f-403e1a9ad10b" class="">Yan Li  03/20/2021</p><p id="e3035d84-cec3-4038-8fc6-777d48b9894a" class="">
+</p><p id="c77c55f9-5118-4f07-ae8f-1fbca7f642e5" class="">This tutorial aims to go through how to use Sketchup to create a 3D terrain model. We are going to use a built-in function called &quot;Geo-location&quot; to download the terrain data and use model-intersection to create the terrain base ( make it more like a 3D physical cutting of earth). I will also show you how to paint the materials and add more components to modify your model.</p><p id="51fe27bb-ac23-4b99-9a95-bb7d9b78498d" class="">Let&#x27;s start it!</p><p id="3a9ab582-229e-4fa2-8fa3-28335c8e69d4" class="">
+</p><p id="8daadd4e-1049-4ab8-8ed8-9c01cc74d253" class="">Advantages of SketchUp: </p><ul id="b5b76da2-5483-409e-a8bc-bef3d6bdbfe4" class="bulleted-list"><li>Easy to use</li></ul><ul id="77c2700c-115e-4c61-8d3a-5bc704e789b0" class="bulleted-list"><li>Build Small-scale 3D Terrains in 5 steps</li></ul><ul id="7700975d-3687-4351-b038-9bdd7444ef6c" class="bulleted-list"><li>Easy to add trees/people/building </li></ul><p id="10fdd03b-4414-4675-bfcd-35d07a496307" class="">Download SketchUp Pro from its official website  <a href="https://www.sketchup.com/products/sketchup-pro?gclid=Cj0KCQjw3duCBhCAARIsAJeFyPWUPa3RNMUR2hvhiLCQLEENqVkZ2ob_YiMqtYQ2hFQrZmAQNcRQIVcaAmacEALw_wcB">here</a> .</p><p id="b565085f-8fc7-407f-bac4-ee9c48f38330" class="">
+</p><p id="b5414ebe-4511-46f6-99d9-f424d200c023" class="">Open SketchUp Pro.</p><p id="3bbc0739-c702-4c21-a671-a98e24f2c375" class="">Click <mark class="highlight-blue_background">File&gt;Geo-location&gt;Add Location</mark>...</p><figure id="26e86166-d35b-49ad-9062-9e71571d6ab1" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled.png"><img style="width:928px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled.png"/></a></figure><p id="bf325962-c134-46a9-995d-10df6a2e2b9e" class="">Sign-in (It&#x27;s free)</p><figure id="61a472de-d874-4cd4-b981-0da4d229f595" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%201.png"><img style="width:720px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%201.png"/></a></figure><p id="c79e98de-7e03-4197-b30a-190b7ad67746" class="">Search the address.</p><figure id="b4826148-b124-45b6-bab9-f0144a218011" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%202.png"><img style="width:1478px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%202.png"/></a></figure><p id="a2e34ffe-4076-42eb-8439-33a068f0b643" class="">select the region (available when zoom level&gt;14)</p><figure id="8b2c1fed-2d11-49d0-a231-57fec89eaef4" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%203.png"><img style="width:1484px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%203.png"/></a></figure><figure id="1301c25f-6e96-4cf8-aa3c-ceb983804fcf" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%204.png"><img style="width:967px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%204.png"/></a></figure><p id="ebf3f36d-fec4-4901-8741-46999a06f950" class="">Choice Provider(some version may skip this step - it&#x27;s fine)</p><figure id="32ab7f07-ade1-408d-ba1e-9d394830e136" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%205.png"><img style="width:1461px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%205.png"/></a></figure><p id="ba64f55a-a16e-4ee0-abc5-75ae69f5e4f9" class="">click import.</p><figure id="91bbc370-9f46-4033-959b-c48ad271c854" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%206.png"><img style="width:1476px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%206.png"/></a></figure><p id="68a5c065-c5ab-4267-a50d-98c80db88020" class="">Now you are import the satellite map to SU.</p><figure id="41e8cd47-ee1a-44ac-8797-1a2117189edb" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%207.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%207.png"/></a></figure><p id="c4de62ab-d121-46cf-963d-09a2eed1885d" class="">Navigate to <mark class="highlight-blue_background">File&gt;Geo-location&gt;Show Terrain.</mark> After click, the Terrain surface will show up. </p><figure id="4c64ea01-6e73-4e5f-89a2-73b6b5a6fab0" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%208.png"><img style="width:1734px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%208.png"/></a></figure><p id="c3438f49-68a7-412a-8b91-f10913e50cfc" class="block-color-orange_background">#<strong>Checkpoint 1</strong> <strong>- Generate Terrain Surface</strong></p><p id="4370cad0-eca9-4c06-96fb-e8bef5e18ed1" class="">You can use the Tape measure tool to measure the dimension. (the number will be shown in the right corner also). Measure the height of the terrain, and write down this number.</p><figure id="bedb09f3-b070-418c-ac22-99d1500592e5" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%209.png"><img style="width:1732px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%209.png"/></a></figure><p id="e1d48ac8-3e6a-4c73-89da-445dd1b97cf1" class="">Next, we are going to make the terrain base.</p><figure id="9d392c31-1b0e-4ac4-b572-f6efd4e91eae" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2010.png"><img style="width:1731px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2010.png"/></a></figure><p id="4a5ac5ee-29d6-4bc2-a270-10b711f22a9d" class="">Add tag (similar to layer in GIS).</p><figure id="1f81fccc-c188-497d-9e72-521414d83e6b" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2011.png"><img style="width:1751px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2011.png"/></a></figure><p id="3cfd7927-df3b-4713-98ce-5835f35c75d1" class="">Name it :) </p><figure id="d2a74956-a885-4b0a-ab7d-14bbe42e6317" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2012.png"><img style="width:1732px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2012.png"/></a></figure><p id="2aa21bdf-035e-41fa-8227-b578db81d6b9" class="">Make the new tag as your working one.</p><figure id="abd13c5e-12da-4261-a662-d13a1dba16c0" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2013.png"><img style="width:1751px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2013.png"/></a></figure><p id="2f42f2b0-fb2a-4e2b-a2d3-279c6e08d75b" class="">Navigate to Camera<mark class="highlight-blue_background">&gt;Standard Views&gt;Top.</mark> </p><figure id="8f1a1dda-b113-40d7-bc9b-3c7e45f11911" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2014.png"><img style="width:1723px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2014.png"/></a></figure><p id="124b4b6e-ffd4-422d-b555-66e4e526d690" class="">Click the “eye” icon to hide the terrain layer.</p><figure id="49026bea-34fd-4354-a7bc-4b1cca380b4c" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2015.png"><img style="width:1728px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2015.png"/></a></figure><p id="3e1310d6-a472-4db2-8b7e-baaae7ac48d0" class="">Use shapes tool draw a rectangular surface. (Note: slightly similar than the image)</p><figure id="ebe7d173-5967-4f1b-bb74-10211e7adfad" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2016.png"><img style="width:1731px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2016.png"/></a></figure><p id="01274d1f-bb29-4b11-9b6f-a3168ab38a80" class="">Change camera to perspective.</p><figure id="87bc1f18-94c6-4ab9-ad87-96404d153ae7" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2017.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2017.png"/></a></figure><p id="5fbcef74-f66f-412a-9253-1565df526cad" class="">Open the terrain layer.</p><p id="f26488d8-abe4-4534-8696-b8f73006ca91" class="">Click the surface, then use the push/pull tool to make a cuboid. Make sure the height is lager than the terrain&#x27;s elevation range.</p><figure id="8b9bc931-45bc-4e29-84a1-c29e1f896ac6" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2018.png"><img style="width:1729px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2018.png"/></a></figure><p id="1672815c-02b7-4823-bf67-a550f56cdd04" class="">Hide image and terrain layer. Select the 3D box, and right click and select make group.</p><figure id="2c4f93d0-894e-4578-bdfd-921700aa873e" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2019.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2019.png"/></a></figure><p id="1700ea11-4105-47db-a4bd-3bd221f0b2ce" class="">Use move tool to move the box, make sure the box is smaller than the terrain surface.</p><p id="394e0bea-161b-4d7a-b89f-887692841336" class="">(you can use the mouse middle to change the camera at the same time). <mark class="highlight-orange">We are going to use the intersect the terrain and box model to get a 3D terrain. </mark></p><figure id="60e72090-63d0-4e0b-b0b7-f84c49f23ea2" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2020.png"><img style="width:1729px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2020.png"/></a></figure><p id="d447eb41-9105-4c80-a7bf-da0aae58b1f0" class="">If your box is two large or not high enough, use scale tool to resize.</p><figure id="bfae1963-8c04-414c-92b0-dae601ddc478" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2021.png"><img style="width:1731px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2021.png"/></a></figure><p id="a4709408-12f5-46ee-b7aa-be9499527dd2" class="">Be sure to make sure that the box can be completely cut on the four sides of the terrain and the Z-axis is wrapped in a cuboid. We can also leave the LOGO outside of the box to cut it later.</p><figure id="37d09a62-3266-4c75-8c52-62353b1ffdb2" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2022.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2022.png"/></a></figure><p id="e48e6531-2569-4348-8a5a-7d56c0314cf1" class="">Error cases:</p><div id="cc72c856-70df-48a3-8273-2aab6df25da7" class="column-list"><div id="d3558869-ff20-4109-8e7d-9323f811ab49" style="width:50%" class="column"><figure id="1ab71cdb-7965-41ee-9a6f-1773050a5bff" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2023.png"><img style="width:432px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2023.png"/></a></figure></div><div id="22658fdf-55e7-464b-9b20-0e2730456b69" style="width:50%" class="column"><figure id="bdadc3a2-a716-40ad-9074-183f485a89e6" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2024.png"><img style="width:1751px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2024.png"/></a></figure></div></div><p id="d14186c6-f07b-47d0-b503-1587b47790c2" class="">Press Ctrl+S to save your model. (In case failure...)</p><figure id="36d4135a-ece9-4314-bf53-f9e68d9b4c12" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2025.png"><img style="width:1728px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2025.png"/></a></figure><p id="9478271f-fb2f-482f-a703-a0c8389baf7c" class="block-color-orange_background">#<strong>Checkpoint 2 PREPARE TO INTERSECT MODEL</strong></p><p id="77234338-8bd8-41f3-b2d6-3bb0a26d541b" class="">Select all, right click Unlock first, then press ctrl+C and ctrl+V to make another copy. </p><p id="53d2550f-e5b1-4271-9602-e46c5ff20b85" class="">(The additional copy is used for redo - in case of failure. We will still work on the original one)</p><figure id="3263024d-7b0f-4779-bcc8-ef8876d2592f" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2026.png"><img style="width:1733px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2026.png"/></a></figure><p id="8854853e-bf5d-4c4b-b51c-b808902e3b9b" class="">Right click explore.</p><figure id="256dd65d-68d0-4325-b455-e6d8a83e9f59" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2027.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2027.png"/></a></figure><p id="f497c9ed-ebb8-4139-80e6-fbc76dea7b5c" class="">Reselect all. Right click <mark class="highlight-blue_background">Intersect Faces&gt;With Model.</mark></p><figure id="996355a5-f2c5-471b-a8ea-14fa66d2903d" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2028.png"><img style="width:1728px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2028.png"/></a></figure><p id="b40738b3-7145-4abe-9600-9932117f953f" class="">Then you can find the box cut by the Terrain surface. </p><figure id="2f345a9c-9eda-497c-bb8c-4a02f239d750" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2029.png"><img style="width:1737px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2029.png"/></a></figure><p id="3b0b5f62-315c-4f8b-9270-d7e30ba67eca" class="">Delete the top surface. </p><figure id="8f95a5e6-cf15-4b73-8f1b-1d7ba72b68fd" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2030.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2030.png"/></a></figure><p id="8dd79b0f-4e88-423c-98ba-f026bfc2a59c" class="">Hold ctrl to select all the faces we want, then right click to make group.</p><p id="0933e694-5824-49be-ae1f-8ec420844d8f" class="block-color-orange_background">#<strong>Checkpoint 3 - 3D MODEL</strong></p><p id="3097a62b-4d70-491f-8b8b-5307711c0bb5" class="">(If you find errors, carefully check the reasons. If it not fully cut, use another copy to repeat the steps of the intersection model. Don&#x27;t forget to make another copy before restart!)</p><figure id="0b1090f1-af20-478e-b7c9-1e7e36109705" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2031.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2031.png"/></a></figure><p id="fd9b729f-0786-4de6-a4b3-63c47cbe49e0" class="">Right click the group, choose lock. the blue frame will change to red color. </p><figure id="4215c1ce-0053-498c-88b5-fc28979623a5" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2032.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2032.png"/></a></figure><p id="b2e3738e-cc14-4a56-a95f-503c111145cd" class="">Select all then press delete(Don&#x27;t worry, our model is locked!). In this way, we can clean the unwanted debris quicker.</p><figure id="4ea5ccc4-b0d5-46be-bc84-48c4827b54ca" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2033.png"><img style="width:1728px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2033.png"/></a></figure><p id="9997a01c-c96d-44c7-8543-c205c5739540" class="">We almost finish our model. Yay!</p><figure id="269cb1b8-1898-4d48-8ac3-6cad3d63d4af" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2034.png"><img style="width:1724px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2034.png"/></a></figure><p id="093b3ff1-1371-4e15-84b5-9048a61df368" class="">Let&#x27;s do the last modify - change the material of the side faces. Make it a little bit more elegant.</p><p id="29ac6ceb-e4b0-46f4-8570-05a9f1367e05" class="">Right click to choose unlock the model, then right click again to edit the group.</p><p id="1f68b641-a1c8-466d-ba52-6c5c34e0fab4" class="">Navigate to the material tab on the right</p><figure id="dca97502-e942-4820-8a24-ba5a5152b392" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2035.png"><img style="width:1739px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2035.png"/></a></figure><p id="3c0a7247-718a-4e35-9b3a-8f5a63b132cd" class="">Choose the material you like, and use the paint bucket tool to paint the material to the faces. </p><figure id="c96ea652-2c7e-4c42-975b-14fe62f28f1c" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2036.png"><img style="width:1732px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2036.png"/></a></figure><p id="d1693a61-6a97-40f6-9c27-f03773fc4349" class="">You can also edit the materials or import the pattern you like.</p><figure id="b2407d49-1de5-49a3-a658-35ea6c4d124a" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2037.png"><img style="width:1751px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2037.png"/></a></figure><p id="75e5517c-e711-4cda-bfb8-63bdd0f83d5a" class=""> You can also open shadows by navigate to View&gt;Shadow. and use the right Shadow tab to adjust.</p><figure id="f73677f2-4db2-4e2e-ae88-311d0be55584" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2038.png"><img style="width:1729px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2038.png"/></a></figure><p id="36549588-664b-44d9-b316-9707f533fe88" class="">Navigate to View&gt;Axes, uncheck it to hide the spatial axes.</p><figure id="9c743126-ebdd-4e0a-aefd-731849af1dd6" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2039.png"><img style="width:1728px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2039.png"/></a></figure><p id="f05a3e8c-c462-42e8-bf14-d55ba1f464c4" class="block-color-orange_background">#<strong>Checkpoint 4 - 3D TERRAIN MODEL</strong></p><p id="043502a1-f213-48bf-8653-fbacded0854e" class="">Congratulations!!!</p><figure id="3d683b9f-8a79-4761-b30c-8ab845884df0" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2040.png"><img style="width:993px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2040.png"/></a></figure><p id="490bd0fc-f4e9-4939-a507-bab144d3a65b" class="">
+</p><p id="192d6376-b484-4d59-ba04-46b07bb9f86d" class="block-color-orange_background">#<strong>Checkpoint 5 - Have fun!</strong></p><p id="a38fdfe1-3a3f-49f4-ac56-afdc392f7d15" class="">Add trees/people/structures...</p><p id="10d893eb-3c2b-4165-8d98-f517c24c31eb" class="">Unfold the right tab of Components, type the components in the search bar. You can also create your own model in SketchUp :)</p><figure id="2f5aaf96-541b-420b-919b-e37b90ad0ced" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2041.png"><img style="width:1751px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2041.png"/></a></figure><p id="22522052-ada4-47a0-8b9e-116b83057f10" class="">Click the tree you want.</p><figure id="46181357-5155-4c10-9a1d-b069b3807a7f" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2042.png"><img style="width:1731px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2042.png"/></a></figure><p id="ab4e2889-9e10-4315-9763-8777c2fcfcb3" class="">Place it in your model. Have fun😉</p><figure id="c7e7ee40-52e2-4000-b457-9ef0f08abcb2" class="image"><a href="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2043.png"><img style="width:1730px" src="EAS687%203D%20modeling%20Tutorial%20-%20SU%2026e86166d35b49ad90629e71571d6ab1/Untitled%2043.png"/></a></figure><p id="15c71ff9-c47c-4f0e-99b1-6a02736dbd20" class="">
+</p><p id="5495c559-ed64-480b-bad4-626294548bd5" class="">
+</p><p id="9a0d0f0d-dc27-46d1-840a-1a0ad3f27a53" class="">_________________________________________________Advanced Modification___________________________________________________________</p><p id="7b3ba73e-fd2c-4e11-ba11-b98633b54c5f" class=""> Export to Rhino: <div class="indented"><p id="0b16c756-e790-40a6-aa38-05a9d7f95a30" class="">Export as <em>(.stl/.obj) </em>format then modify the model in Rhino.<div class="indented"><p id="1c47563c-bfe5-4efb-90e8-11cbd199bc9e" class=""><em>Export to rhino &gt;&gt; Convert to mesh&gt;&gt; Edit the mesh surface</em></p><p id="4e38bae4-d7b7-4e5a-b044-b0efd01e801d" class="">
+</p></div></p></div></p></div></article></body></html>
